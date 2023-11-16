@@ -23,7 +23,7 @@ public class Ui {
         frame.setSize(800, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        tableModel = new DefaultTableModel(new Object[]{"ID", "Name", "Email", "Note", "Action"}, 0);
+        tableModel = new DefaultTableModel(new Object[]{"ID", "Name", "Email", "Note"}, 0);
         studentTable = new JTable(tableModel);
 
         studentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -99,7 +99,7 @@ public class Ui {
         tableModel.setRowCount(0);
         List<Student> students = controller.getAllStudents();
         for (Student student : students) {
-            tableModel.addRow(new Object[]{student.getId(), student.getName(), student.getEmail(), student.getNote(), new JButton("ddd")});
+            tableModel.addRow(new Object[]{student.getId(), student.getName(), student.getEmail(), student.getNote()});
         }
     }
 
@@ -146,7 +146,7 @@ public class Ui {
             JTextField emailField = new JTextField(student.getEmail());
             JTextField noteField = new JTextField(String.valueOf(student.getNote()));
 
-            JPanel panel = new JPanel(new GridLayout(3, 2));
+            JPanel panel = new JPanel(new GridLayout(5, 3));
             panel.add(new JLabel("Name:"));
             panel.add(nameField);
             panel.add(new JLabel("Email:"));
