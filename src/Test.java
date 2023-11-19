@@ -1,5 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
@@ -35,7 +36,7 @@ public class Test {
 
         JPanel headerPanel = new JPanel();
         headerPanel.setBounds(10, 10, 820, 35);
-        headerPanel.setBackground(new Color(11, 125, 227));
+        headerPanel.setBackground(new Color(0x072D37));
         JLabel headerLabel = new JLabel("Student Management");
         headerLabel.setForeground(Color.WHITE);
         headerLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -43,46 +44,74 @@ public class Test {
         managementFrame.getContentPane().add(headerPanel);
 
         JPanel tablePanel = new JPanel();
-        tablePanel.setBorder(new LineBorder(new Color(78, 181, 103), 4));
+        tablePanel.setBackground(new Color(0x3B749E));
+        tablePanel.setBorder(new LineBorder(new Color(96, 134, 165), 4));
         tablePanel.setBounds(260, 50, 575, 355);
         managementFrame.getContentPane().add(tablePanel);
         tablePanel.setLayout(new BorderLayout());
 
+        JLabel tableTitleLabel = new JLabel("Liste des étudiants");
+        tableTitleLabel.setForeground(Color.WHITE);
+        tableTitleLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+        tableTitleLabel.setHorizontalAlignment(JLabel.CENTER);
+        tablePanel.add(tableTitleLabel, BorderLayout.NORTH);
+
+
         tableModel = new DefaultTableModel(new Object[]{"ID", "Name", "Email", "Note"}, 0);
         studentTable = new JTable(tableModel);
         studentTable.setBounds(50, 50, 240, 355);
+        int marginSize = 20;
+        EmptyBorder tableMargin = new EmptyBorder(marginSize, marginSize, marginSize, marginSize);
         JScrollPane tableScrollPane = new JScrollPane(studentTable);
+        tableScrollPane.setBorder(tableMargin);
         tablePanel.add(tableScrollPane, BorderLayout.CENTER);
+        tablePanel.setBackground(new Color(0x072D37));
+
 
         JPanel buttonsPanel = new JPanel();
-        buttonsPanel.setBorder(new LineBorder(new Color(78, 181, 103), 4));
-        buttonsPanel.setBackground(UIManager.getColor("Button.background"));
+        buttonsPanel.setBorder(new LineBorder(new Color(133, 170, 200), 4));
+        buttonsPanel.setBackground(new Color(0x072D37));
         buttonsPanel.setBounds(10, 415, 825, 80);
         managementFrame.getContentPane().add(buttonsPanel);
-        buttonsPanel.setLayout(new GridLayout(0, 5, 0, 0));
+        buttonsPanel.setLayout(new FlowLayout(FlowLayout.LEADING , 80, 17));
 
         JButton addButton = new JButton("Add");
         JButton updateButton = new JButton("Update");
         JButton deleteButton = new JButton("Delete");
-        JButton disconnectButton = new JButton("Disconnect");
         JButton exitButton = new JButton("Exit");
+
+        Color buttonBackgroundColor = new Color(0x8AA9BE);
+        addButton.setBackground(buttonBackgroundColor);
+        updateButton.setBackground(buttonBackgroundColor);
+        deleteButton.setBackground(buttonBackgroundColor);
+        exitButton.setBackground(buttonBackgroundColor);
 
         addButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         updateButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        disconnectButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         exitButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+
+        int buttonMarginSize = 10;
+        EmptyBorder buttonMargin = new EmptyBorder(buttonMarginSize, buttonMarginSize, buttonMarginSize, buttonMarginSize);
+
+        Dimension buttonSize = new Dimension(100, 40);
+
+        addButton.setPreferredSize(buttonSize);
+        updateButton.setPreferredSize(buttonSize);
+        deleteButton.setPreferredSize(buttonSize);
+        exitButton.setPreferredSize(buttonSize);
 
         buttonsPanel.add(addButton);
         buttonsPanel.add(updateButton);
         buttonsPanel.add(deleteButton);
-        buttonsPanel.add(disconnectButton);
         buttonsPanel.add(exitButton);
 
+
         JPanel studentPanel = new JPanel();
-        studentPanel.setBorder(new LineBorder(new Color(78, 181, 103), 4));
+        studentPanel.setBorder(new LineBorder(new Color(96, 134, 165), 4));
         studentPanel.setBounds(10, 50, 240, 355);
         managementFrame.getContentPane().add(studentPanel);
+        studentPanel.setBackground(new Color(0x88B9D3));
         studentPanel.setLayout(null);
 
         JLabel chercherLabel = new JLabel("Chercher");
@@ -94,11 +123,10 @@ public class Test {
         chercherBox.setName("chercherBox");
         chercherBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
         chercherBox.setBounds(85, 23, 143, 22);
-        chercherBox.addItem("Item 1");
-        chercherBox.addItem("Item 2");
-        chercherBox.addItem("Item 3");
+        chercherBox.addItem("ID");
+        chercherBox.addItem("Name");
+        chercherBox.addItem("Note");
         studentPanel.add(chercherBox);
-
 
         chercherField = new JTextField();
         chercherField.setName("chercherField");
@@ -110,6 +138,7 @@ public class Test {
         chercherButton.setName("chercher");
         chercherButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
         chercherButton.setBounds(10, 170, 220, 30);
+
 
         JLabel trierLabel = new JLabel("Trier");
         trierLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -144,6 +173,8 @@ public class Test {
             tableModel.addRow(new Object[]{student.getId(), student.getName(), student.getEmail(), student.getNote()});
         }
     }
+
+
 
     private void searchStudentsByName(String name) {
         List<Student> searchResults = controller.searchStudentByName(name);
