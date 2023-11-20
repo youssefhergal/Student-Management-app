@@ -15,9 +15,6 @@ public class Test {
 
     private Controller controller;
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Test(new Controller()));
-    }
 
     public Test(Controller controller) {
         this.controller = controller;
@@ -149,9 +146,9 @@ public class Test {
         trierBox.setName("trierBox");
         trierBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
         trierBox.setBounds(85, 210, 143, 22);
-        trierBox.addItem("Item 1");
-        trierBox.addItem("Item 2");
-        trierBox.addItem("Item 3");
+        trierBox.addItem("Id");
+        trierBox.addItem("Name");
+        trierBox.addItem("Note");
         studentPanel.add(trierBox);
 
         JButton trierButton = new JButton("Trier");
@@ -164,6 +161,7 @@ public class Test {
         addButton.addActionListener(e -> showAddStudentDialog());
         updateButton.addActionListener(e -> showUpdateStudentDialog());
         deleteButton.addActionListener(e -> deleteSelectedStudent());
+        exitButton.addActionListener(e -> System.exit(-1));
     }
 
     private void showStudentList() {
