@@ -2,4 +2,4 @@
 # Student-Management-app
 
 <img src="demo.png">
-<img src="demo1.png">
+<img src="demo2.png">
